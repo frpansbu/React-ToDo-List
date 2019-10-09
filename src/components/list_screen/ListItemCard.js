@@ -4,6 +4,7 @@ export class ListItemCard extends Component {
     render() {
         return (
             <div className='list_item_card'>
+
                 <div className='list_item_card_desription'>
                     {this.props.listItem.description}
                 </div>

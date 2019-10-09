@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ListHeading from './ListHeading'
 import ListItemsTable from './ListItemsTable'
 import ListTrash from './ListTrash'
+
 import PropTypes from 'prop-types';
 
 export class ListScreen extends Component {
@@ -23,6 +24,7 @@ export class ListScreen extends Component {
         return (
             <div id="todo_list">
                 <ListHeading goHome={this.props.goHome} />
+                
                 <ListTrash />
             
                 <div id="list_details_container">

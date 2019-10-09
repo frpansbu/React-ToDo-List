@@ -39,8 +39,11 @@ class App extends Component {
         return <ListScreen
           goHome={this.goHome.bind(this)}
           todoList={this.state.currentList} />;
+          
       case AppScreen.ITEM_SCREEN:
-        return <ItemScreen />;
+        return <ItemScreen 
+        
+        />;
       default:
         return <div>ERROR</div>;
     }
