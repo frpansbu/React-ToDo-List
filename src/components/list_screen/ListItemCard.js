@@ -17,6 +17,11 @@ export class ListItemCard extends Component {
                 <div className='list_item_card_completed'>
                     {this.props.listItem.completed}
                 </div>
+                <div className = "list_item_card_toolbar">
+                    <span className = "list_item_card_button">&#x21e7;</span>
+                    <span className = "list_item_card_button">&#x21e9;</span>
+                    <span className = "list_item_card_button">&#10005;</span>
+                </div>
             </div>
         )
     }
