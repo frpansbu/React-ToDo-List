@@ -5,6 +5,12 @@ import TodoListLinks from './TodoListLinks'
 import PropTypes from 'prop-types';
 
 export class HomeScreen extends Component {
+
+    onClick = (e) => {
+        e.preventDefault();
+        this.props.addList()
+    }
+
     render() {
         return (
             <div id="todo_home">
@@ -14,7 +20,7 @@ export class HomeScreen extends Component {
                 </div>
                 <Banner />
                 <div id="home_new_list_container">
-                    <button id="home_new_list_button">
+                    <button id="home_new_list_button" onClick = {this.onClick}>
                         Create a New To Do List
                     </button>
                 </div>

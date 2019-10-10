@@ -33,12 +33,24 @@ class App extends Component {
     console.log("deleteList")
   }
 
+  addList = (e) => {
+    const newList = {
+      key: this.state.todoLists[this.state.todoLists.length-1].key + 1,
+      name: "New List",
+      owner: "New Owner",
+      items: [],
+    }
+    this.setState({todoLists: [...this.state.todoLists, newList]})
+  }
+
   render() {
     switch(this.state.currentScreen) {
       case AppScreen.HOME_SCREEN:
         return <HomeScreen 
         loadList={this.loadList.bind(this)} 
-        todoLists={this.state.todoLists} />;
+        todoLists={this.state.todoLists} 
+        addList = {this.addList}
+        />;
       case AppScreen.LIST_SCREEN:            
         return <ListScreen
           goHome={this.goHome.bind(this)}
