@@ -204,8 +204,8 @@ font-size: 16pt;
 
 .modal_dialog {
   position: relative;
-  max-width: 800px;
-  max-height: 80vh;
+  max-width: 1200px;
+  max-height: 800vh;
   border-radius: 5px;
   background: var(--swatch-complement);
   overflow: auto;

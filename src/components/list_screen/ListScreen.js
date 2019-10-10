@@ -38,6 +38,10 @@ export class ListScreen extends Component {
         this.setState({visibleModal: true})
         console.log("show modal");
     }
+    hideModal = () =>{
+        this.setState({visibleModal:false})
+        console.log("hide modal")
+    }
     
 
     render() {
@@ -75,7 +79,15 @@ export class ListScreen extends Component {
                 </div>
                 <ListItemsTable todoList={this.props.todoList} />
                 <div className = "modal" style={{visibility: visibilityState, opacity: opacityState}}>
-                    
+                    <div className = "modal_dialog">
+                        <p>Delete List?</p>
+                        
+                        <p><strong>Are you sure you want to delete the list?</strong></p>
+                        
+                        <button>Yes</button><button onClick = {this.hideModal}> No</button>
+                        <br></br>
+                        <p>The list will not be retreivable</p>
+                    </div>
                 </div>
             </div>
         )
