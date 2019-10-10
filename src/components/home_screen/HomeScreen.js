@@ -32,6 +32,6 @@ export class HomeScreen extends Component {
 HomeScreen.propTypes = {
     loadList: PropTypes.func.isRequired,
     todoLists: PropTypes.array.isRequired
-}
+} //states that loadList and todoLists are required props 
 
 export default HomeScreen

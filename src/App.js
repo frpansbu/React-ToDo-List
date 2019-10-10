@@ -29,18 +29,22 @@ class App extends Component {
     console.log("currentScreen: " + this.state.currentScreen);
   }
 
-  deleteList = () => {
-    console.log("deleteList")
+  deleteList = (e) => {
+    console.log(e)
+    //filter ...
   }
 
   addList = (e) => {
     const newList = {
       key: this.state.todoLists[this.state.todoLists.length-1].key + 1,
-      name: "New List",
-      owner: "New Owner",
+      name: "Unknown",
+      owner: "Unknown",
       items: [],
     }
     this.setState({todoLists: [...this.state.todoLists, newList]})
+    this.setState({currentScreen: AppScreen.LIST_SCREEN});
+    this.setState({currentList: newList});
+    
   }
 
   render() {
@@ -50,13 +54,14 @@ class App extends Component {
         loadList={this.loadList.bind(this)} 
         todoLists={this.state.todoLists} 
         addList = {this.addList}
-        />;
+        />; //passes in loadList and todoLists as props to HomeScreen.js
+        //addList is a method call from homeScreen that is handled here (this)
       case AppScreen.LIST_SCREEN:            
         return <ListScreen
           goHome={this.goHome.bind(this)}
           todoList={this.state.currentList} 
-          deleteList={this.deleteList}/>;
-
+          deleteList={this.deleteList}
+          />;
       case AppScreen.ITEM_SCREEN:
         return <ItemScreen 
         

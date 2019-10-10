@@ -6,6 +6,11 @@ import ListTrash from './ListTrash'
 import PropTypes from 'prop-types';
 
 export class ListScreen extends Component {
+
+    state = {
+        visibleModal: false,
+    }
+
     getListName() {
         if (this.props.todoList) {
             let name = this.props.todoList.name;
@@ -25,12 +30,28 @@ export class ListScreen extends Component {
 
     changeName = (e) => this.props.todoList.name = e.target.value
     
+    /*deleteList = (e) =>{
+        console.log(e)
+    }*/
+
+    showModal = () =>{
+        this.setState({visibleModal: true})
+        console.log("show modal");
+    }
+    
+
     render() {
+        var visibilityState = this.state.visibleModal? "visible":"hidden"
+        var opacityState = this.state.visibleModal? "1":"0"
         return (
             <div id="todo_list">
                 <ListHeading goHome={this.props.goHome} />
                 
-                <ListTrash deleteList = {this.props.deleteList}/>
+                <ListTrash 
+                todoList = {this.props.todoList}
+                //deleteList = {this.props.deleteList}
+                showModal = {this.showModal}
+                />
                 
                 <div id="list_details_container">
                     <div id="list_details_name_container" className="text_toolbar">
@@ -53,9 +74,13 @@ export class ListScreen extends Component {
                     </div>
                 </div>
                 <ListItemsTable todoList={this.props.todoList} />
+                <div className = "modal" style={{visibility: visibilityState, opacity: opacityState}}>
+                    
+                </div>
             </div>
         )
     }
 }
+
 
 export default ListScreen
