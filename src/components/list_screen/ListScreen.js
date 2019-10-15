@@ -38,10 +38,6 @@ export class ListScreen extends Component {
         this.setState({visibleModal:false})
         console.log("hide modal")
     }
-    
-    sortTask = () =>{
-        console.log("sort task")
-    }
 
     render() {
         var visibilityState = this.state.visibleModal? "visible":"hidden"

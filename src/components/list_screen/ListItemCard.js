@@ -19,18 +19,18 @@ export class ListItemCard extends Component {
     }
     getStyle4 = () =>{
         return{
-            backgroundColor: this.props.index == this.props.todoList.items.length-1 ? "gray" : "",
+            backgroundColor: this.props.index === this.props.todoList.items.length-1 ? "gray" : "",
             disabled: true
         }
     }
 
     isDisabled(){
-        if (this.props.index == 0) 
+        if (this.props.index === 0) 
             return true;
     }
 
     isDisabled2(){
-        if ( this.props.index == this.props.todoList.items.length-1)
+        if ( this.props.index === this.props.todoList.items.length-1)
             return true;
     }
     

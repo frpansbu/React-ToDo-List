@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ListItemCard from './ListItemCard'
-import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
+
 export class ListItemsTable extends Component {
     
     constructor(props) {
@@ -14,7 +14,7 @@ export class ListItemsTable extends Component {
     }
 
     sortTask = () =>{
-        if(this.state.sortT == 0){
+        if(this.state.sortT === 0){
             this.props.todoList.items.sort((a,b) => (a.description > b.description ? "1" 
         :a.description < b.description ? "-1" : "0"))
         this.setState({sortT: 1})
@@ -29,7 +29,7 @@ export class ListItemsTable extends Component {
     }
 
     sortDate = () => {
-        if(this.state.sortD == 0){
+        if(this.state.sortD === 0){
             this.props.todoList.items.sort((a,b) => (a.due_date > b.due_date ? "1" 
         :a.due_date < b.due_date ? "-1" : "0"))
         this.setState({sortD: 1})
@@ -44,7 +44,7 @@ export class ListItemsTable extends Component {
     }
 
     sortStatus = () =>{
-        if(this.state.sortS == 0){
+        if(this.state.sortS === 0){
             this.props.todoList.items.sort((a,b) => (a.completed ? "1" 
         :b.completed ? "-1" : "0"))
         this.setState({sortS: 1})

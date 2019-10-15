@@ -4,6 +4,8 @@ import HomeScreen from './components/home_screen/HomeScreen'
 import ItemScreen from './components/item_screen/ItemScreen'
 import ListScreen from './components/list_screen/ListScreen'
 
+import uuid from 'uuid'
+
 const AppScreen = {
   HOME_SCREEN: "HOME_SCREEN",
   LIST_SCREEN: "LIST_SCREEN",
@@ -33,7 +35,7 @@ class App extends Component {
 
   addList = (e) => {
     const newList = {
-      key: this.state.todoLists[this.state.todoLists.length-1].key + 1,
+      key: uuid.v4(),
       name: "Unknown",
       owner: "Unknown",
       items: [],
@@ -45,7 +47,9 @@ class App extends Component {
   }
 
   deleteList = (e) => {
-    console.log(e)
+    this.setState({todoLists:[...this.state.todoLists.filter(todoList => todoList.key !== e)]})
+    this.setState({currentScreen: AppScreen.HOME_SCREEN});
+    this.setState({currentList: null});
   }
 
   render() {
