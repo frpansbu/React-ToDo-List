@@ -29,10 +29,6 @@ export class ListScreen extends Component {
     changeOwner = (e) => this.props.todoList.owner = e.target.value
 
     changeName = (e) => this.props.todoList.name = e.target.value
-    
-    /*deleteList = (e) =>{
-        console.log(e)
-    }*/
 
     showModal = () =>{
         this.setState({visibleModal: true})
@@ -43,6 +39,9 @@ export class ListScreen extends Component {
         console.log("hide modal")
     }
     
+    sortTask = () =>{
+        console.log("sort task")
+    }
 
     render() {
         var visibilityState = this.state.visibleModal? "visible":"hidden"
@@ -52,8 +51,7 @@ export class ListScreen extends Component {
                 <ListHeading goHome={this.props.goHome} />
                 
                 <ListTrash 
-                todoList = {this.props.todoList}
-                //deleteList = {this.props.deleteList}
+                //todoList = {this.props.todoList}
                 showModal = {this.showModal}
                 />
                 
@@ -77,14 +75,18 @@ export class ListScreen extends Component {
                             />
                     </div>
                 </div>
-                <ListItemsTable todoList={this.props.todoList} />
+                <ListItemsTable 
+                todoList={this.props.todoList}
+                //sortTask = {this.sortTask} 
+                />
                 <div className = "modal" style={{visibility: visibilityState, opacity: opacityState}}>
                     <div className = "modal_dialog">
                         <p>Delete List?</p>
                         
                         <p><strong>Are you sure you want to delete the list?</strong></p>
                         
-                        <button>Yes</button><button onClick = {this.hideModal}> No</button>
+                        <button onClick = {() => this.props.deleteList(this.props.todoList.key)}>Yes</button>
+                        <button onClick = {this.hideModal}> No</button>
                         <br></br>
                         <p>The list will not be retreivable</p>
                     </div>

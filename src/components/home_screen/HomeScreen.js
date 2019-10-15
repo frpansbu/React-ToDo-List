@@ -16,7 +16,8 @@ export class HomeScreen extends Component {
             <div id="todo_home">
                 <div id="home_your_lists_container">
                     <HomeHeader />
-                    <TodoListLinks loadList={this.props.loadList} todoLists={this.props.todoLists} />
+                    <TodoListLinks loadList={this.props.loadList} 
+                    todoLists={this.props.todoLists} />
                 </div>
                 <Banner />
                 <div id="home_new_list_container">

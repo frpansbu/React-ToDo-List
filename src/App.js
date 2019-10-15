@@ -29,10 +29,7 @@ class App extends Component {
     console.log("currentScreen: " + this.state.currentScreen);
   }
 
-  deleteList = (e) => {
-    console.log(e)
-    //filter ...
-  }
+  
 
   addList = (e) => {
     const newList = {
@@ -45,6 +42,10 @@ class App extends Component {
     this.setState({currentScreen: AppScreen.LIST_SCREEN});
     this.setState({currentList: newList});
     
+  }
+
+  deleteList = (e) => {
+    console.log(e)
   }
 
   render() {
@@ -60,7 +61,7 @@ class App extends Component {
         return <ListScreen
           goHome={this.goHome.bind(this)}
           todoList={this.state.currentList} 
-          deleteList={this.deleteList}
+          deleteList = {this.deleteList}
           />;
       case AppScreen.ITEM_SCREEN:
         return <ItemScreen 
