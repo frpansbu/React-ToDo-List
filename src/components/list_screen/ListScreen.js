@@ -92,5 +92,9 @@ export class ListScreen extends Component {
     }
 }
 
+ListScreen.propTypes = {
+    todoList: PropTypes.object.isRequired
+}
+
 
 export default ListScreen

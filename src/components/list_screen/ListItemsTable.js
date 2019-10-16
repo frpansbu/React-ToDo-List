@@ -58,6 +58,28 @@ export class ListItemsTable extends Component {
         this.forceUpdate();
     }
 
+    moveUp = (e) =>{
+        let temp =  this.props.todoList.items[e];
+        this.props.todoList.items[e] = this.props.todoList.items[e-1];
+        this.props.todoList.items[e-1] = temp;
+        this.forceUpdate();
+    }
+
+    moveDown = (e) =>{
+        let temp =  this.props.todoList.items[e];
+        this.props.todoList.items[e] = this.props.todoList.items[e+1];
+        this.props.todoList.items[e+1] = temp;
+        this.forceUpdate();
+    }
+
+    deleteItem = (e) =>{
+        for(var i = e; i < this.props.todoList.items.length - 1; i++){
+            this.props.todoList.items[i] = this.props.todoList.items[i+1]
+        }
+        this.props.todoList.items.pop()
+        this.forceUpdate();
+    }
+
     render() {
         var test = 0;
         return (
@@ -75,6 +97,9 @@ export class ListItemsTable extends Component {
                             key={todoItem.key}
                             listItem={todoItem} 
                             todoList = {this.props.todoList}
+                            moveUp = {this.moveUp}
+                            moveDown = {this.moveDown}
+                            deleteItem = {this.deleteItem}
                             />
                     ))
                 } 
