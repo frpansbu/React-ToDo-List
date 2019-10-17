@@ -34,7 +34,19 @@ class App extends Component {
 
   goEdit = (e) =>{
     this.setState({currentScreen: AppScreen.ITEM_SCREEN});
-    this.setState({todoItem: e});
+    if(e){
+      this.setState({todoItem: e});
+    }else{
+      const newTodoItem = {
+        description: "",
+        assigned_to: "",
+        due_date: "",
+        completed: false,
+        key: -1
+      }
+      this.setState({todoItem: newTodoItem});
+    }
+    
   }
 
   addList = (e) => {

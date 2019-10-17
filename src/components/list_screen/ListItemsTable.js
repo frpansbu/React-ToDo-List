@@ -104,7 +104,8 @@ export class ListItemsTable extends Component {
                             />
                     ))
                 } 
-            <div className = "list_item_add_card" onClick = {() => this.props.goEdit()}>&#x2b;</div>
+            <div className = "list_item_add_card" 
+            onClick = {() => this.props.goEdit(null)}>&#x2b;</div>
             </div>
         )
     }
