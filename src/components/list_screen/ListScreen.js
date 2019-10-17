@@ -32,16 +32,17 @@ export class ListScreen extends Component {
 
     showModal = () =>{
         this.setState({visibleModal: true})
-        console.log("show modal");
+        //console.log("show modal");
     }
     hideModal = () =>{
         this.setState({visibleModal:false})
-        console.log("hide modal")
+        //console.log("hide modal")
     }
 
     render() {
         var visibilityState = this.state.visibleModal? "visible":"hidden"
         var opacityState = this.state.visibleModal? "1":"0"
+        var isVisible = this.state.visibleModal? "is_visible": ""
         return (
             <div id="todo_list">
                 <ListHeading goHome={this.props.goHome} />
@@ -76,16 +77,19 @@ export class ListScreen extends Component {
                 //sortTask = {this.sortTask} 
                 goEdit = {this.props.goEdit}
                 />
-                <div className = "modal" style={{visibility: visibilityState, opacity: opacityState}}>
-                    <div className = "modal_dialog">
-                        <p>Delete List?</p>
-                        
-                        <p><strong>Are you sure you want to delete the list?</strong></p>
-                        
-                        <button onClick = {() => this.props.deleteList(this.props.todoList.key)}>Yes</button>
-                        <button onClick = {this.hideModal}> No</button>
-                        <br></br>
-                        <p>The list will not be retreivable</p>
+                <div className= {this.state.visibleModal? "modal is_visible":"modal"} id="modal_yes_no_dialog" data-animation="slideInOutLeft">
+                    <div className="modal_dialog">
+                        <header className="dialog_header">
+                            Delete list?
+                        </header>
+                        <section className="dialog_content">
+                            <p><strong>Are you sure you want to delete this list?</strong></p>
+                        </section>
+                            <button id="dialog_yes_button" onClick = {() => this.props.deleteList(this.props.todoList.key)}>Yes</button>
+                            <button id="dialog_no_button" onClick = {this.hideModal}>No</button>
+                        <footer className="dialog_footer">
+                            The list will not be retreivable.
+                        </footer>
                     </div>
                 </div>
             </div>
