@@ -74,6 +74,7 @@ export class ListScreen extends Component {
                 <ListItemsTable 
                 todoList={this.props.todoList}
                 //sortTask = {this.sortTask} 
+                goEdit = {this.props.goEdit}
                 />
                 <div className = "modal" style={{visibility: visibilityState, opacity: opacityState}}>
                     <div className = "modal_dialog">

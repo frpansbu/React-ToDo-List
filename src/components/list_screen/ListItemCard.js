@@ -33,14 +33,10 @@ export class ListItemCard extends Component {
         if ( this.props.index === this.props.todoList.items.length-1)
             return true;
     }
-    
-    testM = () =>{
-        console.log("test" + this.props.index)
-    }
 
     render() {
         return (
-            <div className='list_item_card'>
+            <div className='list_item_card' onClick = {() => this.props.goEdit(this.props.listItem)}>
 
                 <div className='list_item_card_desription'>
                     {this.props.listItem.description}

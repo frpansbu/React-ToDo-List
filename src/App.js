@@ -16,7 +16,8 @@ class App extends Component {
   state = {
     currentScreen: AppScreen.HOME_SCREEN,
     todoLists: testTodoListData.todoLists,
-    currentList: null
+    currentList: null,
+    todoItem: null
   }
 
   goHome = () => {
@@ -31,7 +32,10 @@ class App extends Component {
     console.log("currentScreen: " + this.state.currentScreen);
   }
 
-  
+  goEdit = (e) =>{
+    this.setState({currentScreen: AppScreen.ITEM_SCREEN});
+    this.setState({todoItem: e});
+  }
 
   addList = (e) => {
     const newList = {
@@ -66,10 +70,14 @@ class App extends Component {
           goHome={this.goHome.bind(this)}
           todoList={this.state.currentList} 
           deleteList = {this.deleteList}
+          goEdit = {this.goEdit}
           />;
       case AppScreen.ITEM_SCREEN:
         return <ItemScreen 
-        
+          todoList = {this.state.currentList}
+          cancelEdit = {this.loadList.bind(this)}
+          todoItem = {this.state.todoItem}
+          currentScreen = {this.state.currentScreen}
         />;
       default:
         return <div>ERROR</div>;

@@ -100,10 +100,11 @@ export class ListItemsTable extends Component {
                             moveUp = {this.moveUp}
                             moveDown = {this.moveDown}
                             deleteItem = {this.deleteItem}
+                            goEdit = {this.props.goEdit}
                             />
                     ))
                 } 
-            <div className = "list_item_add_card" >&#x2b;</div>
+            <div className = "list_item_add_card" onClick = {() => this.props.goEdit()}>&#x2b;</div>
             </div>
         )
     }
