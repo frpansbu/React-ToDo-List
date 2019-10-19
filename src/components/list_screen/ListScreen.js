@@ -29,6 +29,7 @@ export class ListScreen extends Component {
         }
         if(e.keyCode === 89 && e.ctrlKey){
             this.props.redo();
+            this.forceUpdate();
         }
     }
 
@@ -81,10 +82,33 @@ export class ListScreen extends Component {
         }
         this.props.pushUndo(copy);
         this.props.todoList.owner = e.target.value;
-        
+        this.forceUpdate();
     }
     changeName = (e) => {
-        this.props.todoList.name = e.target.value
+        let itemsCopy = [];
+        for(let i = 0; i < this.props.todoList.items.length; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.props.todoList.items[i].key;
+            itemsCopy[i].description = this.props.todoList.items[i].description;
+            itemsCopy[i].due_date = this.props.todoList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.props.todoList.items[i].assigned_to;
+            itemsCopy[i].completed = this.props.todoList.items[i].completed;
+        }
+        let copy = {
+            key: this.props.todoList.key,
+            name: this.props.todoList.name,
+            owner: this.props.todoList.owner,
+            items: itemsCopy
+        }
+        this.props.pushUndo(copy);
+        this.props.todoList.name = e.target.value;
+        this.forceUpdate();
     }
     showModal = () =>{
         this.setState({visibleModal: true})
@@ -113,7 +137,7 @@ export class ListScreen extends Component {
                     <div id="list_details_name_container" className="text_toolbar">
                         <span id="list_name_prompt">Name:</span>
                         <input 
-                            defaultValue={this.getListName()} 
+                            value={this.getListName()} 
                             type="text" 
                             id="list_name_textfield" 
                             onChange = {this.changeName}
@@ -122,7 +146,7 @@ export class ListScreen extends Component {
                     <div id="list_details_owner_container" className="text_toolbar">
                         <span id="list_owner_prompt">Owner:</span>
                         <input 
-                            defaultValue={this.getListOwner()}
+                            value={this.getListOwner()}
                             type="text" 
                             id="list_owner_textfield" 
                             onChange = {this.changeOwner}

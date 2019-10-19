@@ -86,7 +86,33 @@ class App extends Component {
     if(undoList.length === 0){
       console.log("nothing to undo");
     }else{
-      let tempTodoLists = []
+      let tempTodoLists = [];
+      //this.pushRedo(undoList[undoList.length -1]);
+      //copy all todoLists besides the todoList we're in
+      //console.log(undoList);
+      let itemsCopy = [];
+        for(let i = 0; i < this.state.currentList.items.length ; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.state.currentList.items[i].key;
+            itemsCopy[i].description = this.state.currentList.items[i].description;
+            itemsCopy[i].due_date = this.state.currentList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.state.currentList.items[i].assigned_to;
+            itemsCopy[i].completed = this.state.currentList.items[i].completed;
+        }
+        let copy = {
+            key: this.state.currentList.key,
+            name: this.state.currentList.name,
+            owner: this.state.currentList.owner,
+            items: itemsCopy
+        }
+        this.pushRedo(copy);
+        //
       for(let i = 0; i < this.state.todoLists.length ; i++){
         if(this.state.todoLists[i].key !== undoList[0].key){
           tempTodoLists.push(this.state.todoLists[i])
@@ -97,23 +123,60 @@ class App extends Component {
       }
       this.setState({todoLists: tempTodoLists})
       this.setState({currentList: undoList[undoList.length-1]});
-      this.pushRedo(undoList.pop());
-      console.log("current List : ")
+      (undoList.pop());
+      /*console.log("current List : ")
       console.log(this.state.currentList);
       console.log("todoLists: ")
-      console.log(this.state.todoLists);
+      console.log(this.state.todoLists);*/
       
     }
     
   }
 
   pushRedo = (e) =>{
-    //console.log(e);
-    
+    redoList.push(e);
+    console.log("redo list");
+    console.log(redoList);
   }
 
   myRedo = (e) =>{
-
+    if(redoList.length === 0){
+      console.log("nothing to redo");
+    }else{
+      let tempTodoLists = [];
+      let itemsCopy = [];
+        for(let i = 0; i < this.state.currentList.items.length ; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.state.currentList.items[i].key;
+            itemsCopy[i].description = this.state.currentList.items[i].description;
+            itemsCopy[i].due_date = this.state.currentList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.state.currentList.items[i].assigned_to;
+            itemsCopy[i].completed = this.state.currentList.items[i].completed;
+        }
+        let copy = {
+            key: this.state.currentList.key,
+            name: this.state.currentList.name,
+            owner: this.state.currentList.owner,
+            items: itemsCopy
+        }
+        this.pushUndo(copy);
+      for(let i = 0; i < this.state.todoLists.length ; i++){
+        if(this.state.todoLists[i].key !== redoList[0].key){
+          tempTodoLists.push(this.state.todoLists[i])
+        }else{
+          tempTodoLists.push(redoList[redoList.length-1])
+        }
+      }
+      this.setState({todoLists: tempTodoLists})
+      this.setState({currentList: redoList[redoList.length-1]});
+      (redoList.pop());
+    }
   }
 
   render() {
