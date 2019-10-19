@@ -14,6 +14,31 @@ export class ListItemsTable extends Component {
     }
 
     sortTask = () =>{
+        ////
+        let itemsCopy = [];
+        for(let i = 0; i < this.props.todoList.items.length; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.props.todoList.items[i].key;
+            itemsCopy[i].description = this.props.todoList.items[i].description;
+            itemsCopy[i].due_date = this.props.todoList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.props.todoList.items[i].assigned_to;
+            itemsCopy[i].completed = this.props.todoList.items[i].completed;
+        }
+        let copy = {
+            key: this.props.todoList.key,
+            name: this.props.todoList.name,
+            owner: this.props.todoList.owner,
+            items: itemsCopy
+        }
+        this.props.pushUndo(copy);
+        this.forceUpdate();
+        ////
         if(this.state.sortT === 0){
             this.props.todoList.items.sort((a,b) => (a.description > b.description ? "1" 
         :a.description < b.description ? "-1" : "0"))
@@ -29,6 +54,31 @@ export class ListItemsTable extends Component {
     }
 
     sortDate = () => {
+        ////
+        let itemsCopy = [];
+        for(let i = 0; i < this.props.todoList.items.length; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.props.todoList.items[i].key;
+            itemsCopy[i].description = this.props.todoList.items[i].description;
+            itemsCopy[i].due_date = this.props.todoList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.props.todoList.items[i].assigned_to;
+            itemsCopy[i].completed = this.props.todoList.items[i].completed;
+        }
+        let copy = {
+            key: this.props.todoList.key,
+            name: this.props.todoList.name,
+            owner: this.props.todoList.owner,
+            items: itemsCopy
+        }
+        this.props.pushUndo(copy);
+        this.forceUpdate();
+        ////
         if(this.state.sortD === 0){
             this.props.todoList.items.sort((a,b) => (a.due_date > b.due_date ? "1" 
         :a.due_date < b.due_date ? "-1" : "0"))
@@ -44,6 +94,31 @@ export class ListItemsTable extends Component {
     }
 
     sortStatus = () =>{
+        ////
+        let itemsCopy = [];
+        for(let i = 0; i < this.props.todoList.items.length; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.props.todoList.items[i].key;
+            itemsCopy[i].description = this.props.todoList.items[i].description;
+            itemsCopy[i].due_date = this.props.todoList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.props.todoList.items[i].assigned_to;
+            itemsCopy[i].completed = this.props.todoList.items[i].completed;
+        }
+        let copy = {
+            key: this.props.todoList.key,
+            name: this.props.todoList.name,
+            owner: this.props.todoList.owner,
+            items: itemsCopy
+        }
+        this.props.pushUndo(copy);
+        this.forceUpdate();
+        ////
         if(this.state.sortS === 0){
             this.props.todoList.items.sort((a,b) => (a.completed ? "1" 
         :b.completed ? "-1" : "0"))
