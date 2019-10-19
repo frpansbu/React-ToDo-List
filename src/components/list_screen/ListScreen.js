@@ -7,10 +7,39 @@ import PropTypes from 'prop-types';
 
 export class ListScreen extends Component {
 
-    state = {
-        visibleModal: false,
+    constructor(props){
+        super(props);
     }
 
+    state = {
+        visibleModal: false,
+        //listDetails: this.props.currentList
+        
+    }
+
+    /*
+    componentWillReceiveProps(nextProps){
+        this.setState({listDetails: nextProps.listDetails})
+    }*/
+
+    keyDownHander = (e) =>{
+        if(e.keyCode === 90 && e.ctrlKey){
+            this.props.undo();
+            this.forceUpdate();
+        }
+        if(e.keyCode === 89 && e.ctrlKey){
+            this.props.redo();
+        }
+    }
+
+    componentDidMount(){
+        document.addEventListener('keydown', this.keyDownHander);
+    }
+
+    componentWillUnmount(){
+        document.removeEventListener('keydown', this.keyDownHander);
+    }
+    
     getListName() {
         if (this.props.todoList) {
             let name = this.props.todoList.name;
@@ -24,12 +53,39 @@ export class ListScreen extends Component {
             let owner = this.props.todoList.owner;
             return this.props.todoList.owner;
         }
+        else 
+            return "";
     }
 
-    changeOwner = (e) => this.props.todoList.owner = e.target.value
-
-    changeName = (e) => this.props.todoList.name = e.target.value
-
+    changeOwner = (e) => {
+        let itemsCopy = [];
+        for(let i = 0; i < this.props.todoList.items.length; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.props.todoList.items[i].key;
+            itemsCopy[i].description = this.props.todoList.items[i].description;
+            itemsCopy[i].due_date = this.props.todoList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.props.todoList.items[i].assigned_to;
+            itemsCopy[i].completed = this.props.todoList.items[i].completed;
+        }
+        let copy = {
+            key: this.props.todoList.key,
+            name: this.props.todoList.name,
+            owner: this.props.todoList.owner,
+            items: itemsCopy
+        }
+        this.props.pushUndo(copy);
+        this.props.todoList.owner = e.target.value;
+        
+    }
+    changeName = (e) => {
+        this.props.todoList.name = e.target.value
+    }
     showModal = () =>{
         this.setState({visibleModal: true})
         //console.log("show modal");
@@ -40,9 +96,10 @@ export class ListScreen extends Component {
     }
 
     render() {
-        var visibilityState = this.state.visibleModal? "visible":"hidden"
+        /*var visibilityState = this.state.visibleModal? "visible":"hidden"
         var opacityState = this.state.visibleModal? "1":"0"
-        var isVisible = this.state.visibleModal? "is_visible": ""
+        var isVisible = this.state.visibleModal? "is_visible": ""*/
+        
         return (
             <div id="todo_list">
                 <ListHeading goHome={this.props.goHome} />

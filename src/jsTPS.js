@@ -1,6 +1,6 @@
 class jsTPS{
     constructor(){
-        this.transactions  = new Array();
+        this.transactions  = [];
         this.mostRecentTransaction = -1;
         this.performingDo = false;
         this.performingUndo = false;
@@ -93,10 +93,12 @@ class jsTPS{
         text += "--Current Index on Stack: " + this.mostRecentTransaction + "\n";
         text += "--Current Transaction Stack:\n";
         for (let i = 0; i <= this.mostRecentTransaction; i++) {
-            jT = this.transactions[i];
+            let jT = this.transactions[i];
             text += "----" + jT.toString() + "\n";
         }
         return text;
     }
 
 }
+
+export default new jsTPS()

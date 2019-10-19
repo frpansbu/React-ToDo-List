@@ -4,7 +4,13 @@ import HomeScreen from './components/home_screen/HomeScreen'
 import ItemScreen from './components/item_screen/ItemScreen'
 import ListScreen from './components/list_screen/ListScreen'
 
+//import jsTPS from './jsTPS'
+
 import uuid from 'uuid'
+
+let undoList = [];
+let redoList = [];
+
 
 const AppScreen = {
   HOME_SCREEN: "HOME_SCREEN",
@@ -17,12 +23,15 @@ class App extends Component {
     currentScreen: AppScreen.HOME_SCREEN,
     todoLists: testTodoListData.todoLists,
     currentList: null,
-    todoItem: null
+    todoItem: null,
+    //jsTPS: new jsTPS()
   }
 
   goHome = () => {
     this.setState({currentScreen: AppScreen.HOME_SCREEN});
     this.setState({currentList: null});
+    undoList = [];
+    redoList = [];
   }
 
   loadList = (todoListToLoad) => {
@@ -68,6 +77,45 @@ class App extends Component {
     this.setState({currentList: null});
   }
 
+  pushUndo = (e) => {
+    undoList.push(e);
+    //console.log(undoList);
+  }
+
+  myUndo = (e) => {
+    if(undoList.length === 0){
+      console.log("nothing to undo");
+    }else{
+      let tempTodoLists = []
+      for(let i = 0; i < this.state.todoLists.length ; i++){
+        if(this.state.todoLists[i].key !== undoList[0].key){
+          tempTodoLists.push(this.state.todoLists[i])
+          
+        }else{
+          tempTodoLists.push(undoList[undoList.length-1])
+        }
+      }
+      this.setState({todoLists: tempTodoLists})
+      this.setState({currentList: undoList[undoList.length-1]});
+      this.pushRedo(undoList.pop());
+      console.log("current List : ")
+      console.log(this.state.currentList);
+      console.log("todoLists: ")
+      console.log(this.state.todoLists);
+      
+    }
+    
+  }
+
+  pushRedo = (e) =>{
+    //console.log(e);
+    
+  }
+
+  myRedo = (e) =>{
+
+  }
+
   render() {
     switch(this.state.currentScreen) {
       case AppScreen.HOME_SCREEN:
@@ -83,6 +131,10 @@ class App extends Component {
           todoList={this.state.currentList} 
           deleteList = {this.deleteList}
           goEdit = {this.goEdit}
+          pushUndo = {this.pushUndo}
+          undo = {this.myUndo}
+          redo = {this.myRedo}
+          pushRedo = {this.pushRedo}
           />;
       case AppScreen.ITEM_SCREEN:
         return <ItemScreen 
@@ -90,6 +142,7 @@ class App extends Component {
           cancelEdit = {this.loadList.bind(this)}
           todoItem = {this.state.todoItem}
           currentScreen = {this.state.currentScreen}
+          
         />;
       default:
         return <div>ERROR</div>;
