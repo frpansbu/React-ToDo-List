@@ -60,6 +60,32 @@ export class ListItemsTable extends Component {
 
     moveUp = (ind, e) =>{
         e.stopPropagation();
+        ////
+        let itemsCopy = [];
+        for(let i = 0; i < this.props.todoList.items.length; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.props.todoList.items[i].key;
+            itemsCopy[i].description = this.props.todoList.items[i].description;
+            itemsCopy[i].due_date = this.props.todoList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.props.todoList.items[i].assigned_to;
+            itemsCopy[i].completed = this.props.todoList.items[i].completed;
+        }
+        let copy = {
+            key: this.props.todoList.key,
+            name: this.props.todoList.name,
+            owner: this.props.todoList.owner,
+            items: itemsCopy
+        }
+        this.props.pushUndo(copy);
+        this.forceUpdate();
+        ////
+        
         let temp =  this.props.todoList.items[ind];
         this.props.todoList.items[ind] = this.props.todoList.items[ind-1];
         this.props.todoList.items[ind-1] = temp;
@@ -68,6 +94,31 @@ export class ListItemsTable extends Component {
 
     moveDown = (ind, e) =>{
         e.stopPropagation();
+        ///
+        let itemsCopy = [];
+        for(let i = 0; i < this.props.todoList.items.length; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.props.todoList.items[i].key;
+            itemsCopy[i].description = this.props.todoList.items[i].description;
+            itemsCopy[i].due_date = this.props.todoList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.props.todoList.items[i].assigned_to;
+            itemsCopy[i].completed = this.props.todoList.items[i].completed;
+        }
+        let copy = {
+            key: this.props.todoList.key,
+            name: this.props.todoList.name,
+            owner: this.props.todoList.owner,
+            items: itemsCopy
+        }
+        this.props.pushUndo(copy);
+        this.forceUpdate();
+        ///
         let temp =  this.props.todoList.items[ind];
         this.props.todoList.items[ind] = this.props.todoList.items[ind+1];
         this.props.todoList.items[ind+1] = temp;
@@ -76,6 +127,31 @@ export class ListItemsTable extends Component {
 
     deleteItem = (ind, e) =>{
         e.stopPropagation();
+        ///
+        let itemsCopy = [];
+        for(let i = 0; i < this.props.todoList.items.length; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.props.todoList.items[i].key;
+            itemsCopy[i].description = this.props.todoList.items[i].description;
+            itemsCopy[i].due_date = this.props.todoList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.props.todoList.items[i].assigned_to;
+            itemsCopy[i].completed = this.props.todoList.items[i].completed;
+        }
+        let copy = {
+            key: this.props.todoList.key,
+            name: this.props.todoList.name,
+            owner: this.props.todoList.owner,
+            items: itemsCopy
+        }
+        this.props.pushUndo(copy);
+        this.forceUpdate();
+        ///
         for(var i = ind; i < this.props.todoList.items.length - 1; i++){
             this.props.todoList.items[i] = this.props.todoList.items[i+1]
         }

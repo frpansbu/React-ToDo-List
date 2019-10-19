@@ -21,6 +21,31 @@ export class  ItemScreen extends Component {
     }
 
     submitEdit = () =>{
+        ///
+        let itemsCopy = [];
+        for(let i = 0; i < this.props.todoList.items.length; i++){
+            itemsCopy[i] = {
+                key: "",
+                description: "",
+                due_date: "",
+                assigned_to: "",
+                completed: false,
+            }
+            itemsCopy[i].key = this.props.todoList.items[i].key;
+            itemsCopy[i].description = this.props.todoList.items[i].description;
+            itemsCopy[i].due_date = this.props.todoList.items[i].due_date;
+            itemsCopy[i].assigned_to = this.props.todoList.items[i].assigned_to;
+            itemsCopy[i].completed = this.props.todoList.items[i].completed;
+        }
+        let copy = {
+            key: this.props.todoList.key,
+            name: this.props.todoList.name,
+            owner: this.props.todoList.owner,
+            items: itemsCopy
+        }
+        this.props.pushUndo(copy);
+        this.forceUpdate();
+        ///
         this.props.todoItem.description = this.state.descriptonV;
         this.props.todoItem.assigned_to = this.state.assignedV;
         this.props.todoItem.due_date = this.state.dueDateV;

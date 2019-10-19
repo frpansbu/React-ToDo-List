@@ -79,7 +79,7 @@ class App extends Component {
 
   pushUndo = (e) => {
     undoList.push(e);
-    //console.log(undoList);
+    console.log(undoList);
   }
 
   myUndo = (e) => {
@@ -205,7 +205,10 @@ class App extends Component {
           cancelEdit = {this.loadList.bind(this)}
           todoItem = {this.state.todoItem}
           currentScreen = {this.state.currentScreen}
-          
+          pushUndo = {this.pushUndo}
+          undo = {this.myUndo}
+          redo = {this.myRedo}
+          pushRedo = {this.pushRedo}
         />;
       default:
         return <div>ERROR</div>;

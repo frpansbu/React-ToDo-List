@@ -157,6 +157,7 @@ export class ListScreen extends Component {
                 todoList={this.props.todoList}
                 //sortTask = {this.sortTask} 
                 goEdit = {this.props.goEdit}
+                pushUndo = {this.props.pushUndo}
                 />
                 <div className= {this.state.visibleModal? "modal is_visible":"modal"} id="modal_yes_no_dialog" data-animation="slideInOutLeft">
                     <div className="modal_dialog">
